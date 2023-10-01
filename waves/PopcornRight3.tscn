@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Flier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Wave.gd" type="Script" id=2]
+
+[node name="PopcornRight3" type="Node2D"]
+position = Vector2( 0, 16 )
+script = ExtResource( 2 )
+
+[node name="Flier" parent="." instance=ExtResource( 1 )]
+position = Vector2( 243, 82 )
+rotation = 3.14159
+direction = 180.0

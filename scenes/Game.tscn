@@ -1,0 +1,152 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://scripts/PlayArea.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Player.gd" type="Script" id=2]
+[ext_resource path="res://sprites/sprite_player.png" type="Texture" id=3]
+[ext_resource path="res://addons/native_bullets/utils/timed_events.gd" type="Script" id=4]
+[ext_resource path="res://addons/native_bullets/utils/bullets_spawner.gd" type="Script" id=5]
+[ext_resource path="res://bulletkits/PlayerShot.tres" type="Resource" id=6]
+[ext_resource path="res://addons/native_bullets/bullets_environment.gd" type="Script" id=7]
+[ext_resource path="res://bulletkits/Bullet.tres" type="Resource" id=8]
+[ext_resource path="res://waves/PopcornRight3.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Game.gd" type="Script" id=10]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sprites/sprite_guide.png" type="Texture" id=12]
+[ext_resource path="res://waves/BossWave.tscn" type="PackedScene" id=13]
+[ext_resource path="res://waves/CornerTR.tscn" type="PackedScene" id=14]
+[ext_resource path="res://waves/CornerTRMini.tscn" type="PackedScene" id=15]
+[ext_resource path="res://waves/PopcornLeft2.tscn" type="PackedScene" id=16]
+[ext_resource path="res://waves/PopcornRight2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://waves/PopcornLeft1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://waves/PopcornRight1.tscn" type="PackedScene" id=19]
+[ext_resource path="res://waves/PopcornLeft3.tscn" type="PackedScene" id=20]
+[ext_resource path="res://waves/CornerTL.tscn" type="PackedScene" id=21]
+[ext_resource path="res://waves/SkullBow.tscn" type="PackedScene" id=22]
+[ext_resource path="res://waves/CornerBR.tscn" type="PackedScene" id=23]
+[ext_resource path="res://waves/GemMiddle.tscn" type="PackedScene" id=24]
+[ext_resource path="res://waves/SkullStar.tscn" type="PackedScene" id=25]
+[ext_resource path="res://waves/CornerTLMini.tscn" type="PackedScene" id=26]
+[ext_resource path="res://waves/GemInner.tscn" type="PackedScene" id=27]
+[ext_resource path="res://waves/SkullPort.tscn" type="PackedScene" id=28]
+[ext_resource path="res://waves/GemOuter.tscn" type="PackedScene" id=29]
+[ext_resource path="res://waves/SkullTutorial.tscn" type="PackedScene" id=30]
+[ext_resource path="res://waves/CornerBL.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/Gem.tscn" type="PackedScene" id=32]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 72.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 0.5
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.558559, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 10 )
+flier_waves = [ ExtResource( 31 ), ExtResource( 23 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 26 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 9 ) ]
+gem_waves = [ ExtResource( 27 ), ExtResource( 24 ), ExtResource( 29 ) ]
+skull_waves = [ ExtResource( 22 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 30 ) ]
+boss_wave = ExtResource( 13 )
+gem = ExtResource( 32 )
+
+[node name="BulletsEnvironment" type="Node" parent="."]
+script = ExtResource( 7 )
+bullet_kits = [ ExtResource( 6 ), ExtResource( 8 ) ]
+pools_sizes = [ 3000, 3000 ]
+parents_hints = [ null, null ]
+z_indices = [ null, 2 ]
+bullet_types_amount = 2
+bullet_type_0/bullet_kit = ExtResource( 6 )
+bullet_type_0/pool_size = 3000
+bullet_type_0/parent_hint = null
+bullet_type_0/z_index = null
+bullet_type_1/bullet_kit = ExtResource( 8 )
+bullet_type_1/pool_size = 3000
+bullet_type_1/parent_hint = null
+bullet_type_1/z_index = 2
+
+[node name="PlayArea" type="Area2D" parent="."]
+position = Vector2( 160, 90 )
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="PlayArea"]
+
+[node name="Player" type="Area2D" parent="."]
+position = Vector2( 160, 90 )
+collision_layer = 8
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 1.5, 0 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 3 )
+
+[node name="TimedEvents" type="Node" parent="Player"]
+script = ExtResource( 4 )
+enabled = false
+events_per_second_over_time = SubResource( 2 )
+events_per_second_multiplier = 12.0
+
+[node name="BulletsSpawner" type="Node2D" parent="Player"]
+script = ExtResource( 5 )
+bullet_kit = ExtResource( 6 )
+bullets_speed = 360.0
+
+[node name="Node2D2" type="Node2D" parent="Player/BulletsSpawner"]
+position = Vector2( 1, -3 )
+
+[node name="Node2D" type="Node2D" parent="Player/BulletsSpawner"]
+position = Vector2( 1, 3 )
+
+[node name="Invincibility" type="Timer" parent="Player"]
+one_shot = true
+
+[node name="GUI" parent="." instance=ExtResource( 11 )]
+
+[node name="SpriteGuide" type="Sprite" parent="."]
+visible = false
+z_index = 4
+texture = ExtResource( 12 )
+centered = false
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="Positions"]
+position = Vector2( 104, 34 )
+
+[node name="Node2D2" type="Node2D" parent="Positions"]
+position = Vector2( 216, 34 )
+
+[node name="Node2D3" type="Node2D" parent="Positions"]
+position = Vector2( 216, 146 )
+
+[node name="Node2D4" type="Node2D" parent="Positions"]
+position = Vector2( 104, 146 )
+
+[node name="Node2D5" type="Node2D" parent="Positions"]
+position = Vector2( 133, 63 )
+
+[node name="Node2D6" type="Node2D" parent="Positions"]
+position = Vector2( 187, 63 )
+
+[node name="Node2D7" type="Node2D" parent="Positions"]
+position = Vector2( 187, 117 )
+
+[node name="Node2D8" type="Node2D" parent="Positions"]
+position = Vector2( 133, 117 )
+
+[connection signal="area_exited" from="PlayArea" to="Player" method="hurt"]
+[connection signal="area_shape_entered" from="Player" to="Player" method="_on_Player_area_shape_entered"]
+[connection signal="event" from="Player/TimedEvents" to="Player" method="_on_TimedEvents_event"]
+[connection signal="event" from="Player/TimedEvents" to="Player/BulletsSpawner" method="shoot"]

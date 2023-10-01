@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Skull.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Wave.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Skull.gd" type="Script" id=3]
+
+[node name="SkullTutorial" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Skull" type="Area2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 82, 41 )
+collision_layer = 2
+collision_mask = 4
+script = ExtResource( 3 )
+health = 9
+score = 40
+multiplier_increase = 0.1
+velocity = Vector2( 50, 0 )
+
+[connection signal="area_shape_entered" from="Skull" to="Skull" method="_on_Enemy_area_shape_entered"]

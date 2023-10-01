@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/sprite_boss.png" type="Texture" id=2]
+[ext_resource path="res://bulletkits/Bullet.tres" type="Resource" id=3]
+[ext_resource path="res://addons/native_bullets/utils/bullets_spawner.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Boss.gd" type="Script" id=5]
+[ext_resource path="res://addons/native_bullets/utils/timed_rotator.gd" type="Script" id=6]
+[ext_resource path="res://addons/native_bullets/utils/timed_events.gd" type="Script" id=7]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 35, 36 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 35, 0, 35, 36 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 70, 0, 35, 36 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 105, 0, 35, 36 )
+
+[sub_resource type="SpriteFrames" id=6]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 11.0
+height = 16.0
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 1, Vector2( 1, 1 ), 0.0, 0.0, 1, 0 ]
+
+[sub_resource type="Curve" id=8]
+max_value = 360.0
+_data = [ Vector2( 0, 0 ), 0.0, 360.0, 0, 1, Vector2( 1, 360 ), 360.0, 0.0, 1, 0 ]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+health = 500
+score = 1000
+multiplier_increase = 0.1
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 6 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="TimedEvents" type="Node" parent="." index="3"]
+script = ExtResource( 7 )
+events_per_second_over_time = SubResource( 7 )
+events_per_second_multiplier = 3.0
+
+[node name="Explosion" type="Node2D" parent="." index="4"]
+script = ExtResource( 4 )
+bullet_kit = ExtResource( 3 )
+bullets_speed = 24.0
+
+[node name="TimedRotator" type="Node2D" parent="Explosion" index="0"]
+script = ExtResource( 6 )
+duration = 8.0
+orientation_over_time = SubResource( 8 )
+
+[connection signal="tree_exiting" from="." to="." method="_on_Enemy_tree_exiting"]
+[connection signal="event" from="TimedEvents" to="Explosion" method="shoot"]

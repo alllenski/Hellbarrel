@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Flier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Wave.gd" type="Script" id=2]
+
+[node name="PopcornLeft1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Flier" parent="." instance=ExtResource( 1 )]
+position = Vector2( 76, 90 )

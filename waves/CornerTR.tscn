@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Flier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Wave.gd" type="Script" id=3]
+
+[node name="CornerTR" type="Node2D"]
+position = Vector2( 140, -129 )
+script = ExtResource( 3 )
+
+[node name="Flier" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 141 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 141 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 100, 141 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 150 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 150 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 100, 150 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 80, 159 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 159 )
+rotation = 2.35619
+direction = 135.0
+
+[node name="Flier9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 100, 159 )
+rotation = 2.35619
+direction = 135.0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bgm_march.mp3-d98b1fbc3b68849ffa156dc4630a946b.mp3str"
+
+[deps]
+
+source_file="res://audio/bgm/bgm_march.mp3"
+dest_files=[ "res://.import/bgm_march.mp3-d98b1fbc3b68849ffa156dc4630a946b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

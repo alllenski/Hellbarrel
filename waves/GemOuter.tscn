@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Gem.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Wave.gd" type="Script" id=3]
+
+[node name="GemOuter" type="Node2D"]
+position = Vector2( -2, 9 )
+script = ExtResource( 3 )
+
+[node name="Gem" parent="." instance=ExtResource( 1 )]
+position = Vector2( 106, 25 )
+
+[node name="Gem2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 218, 25 )
+
+[node name="Gem3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 218, 137 )
+
+[node name="Gem4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 106, 137 )
